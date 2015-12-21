@@ -9,9 +9,16 @@
     margin:auto;
     margin-top: 100px;
     position: relative;
-    > div,.living1 {
+    /**
+    > div,.living1,[class*="living"],[class*="terrace"] {
         background: red;
         opacity: .4;
+    }
+    **/
+    > div:hover {
+        border:3px dotted red;
+        background: red;
+        opacity: .6;
     }
     .bedroom1 {
         height: 161px;
@@ -105,23 +112,25 @@
         width: 138px;
     }
     .living {
-        .living-container {
-            position: relative;
-            .living1 {
-                height: 279px;
-                left: 461px;
-                position: absolute;
-                top: 355px;
-                width: 157px;
-            }
-            .living2 {
-                width: 0;
-                height: 0;
-                border-style: solid;
-                border-width: 230px 0 0 40px;
-                border-color: transparent transparent transparent #007bff;
-            }
-        }
+        height: 279px;
+        left: 461px;
+        position: absolute;
+        top: 355px;
+        width: 134px;
+    }
+    .terrace {
+        height: 512px;
+        left: 593px;
+        position: absolute;
+        top: 132px;
+        width: 171px;
+    }
+    .landscape {
+        height: 477px;
+        left: 764px;
+        position: absolute;
+        top: 163px;
+        width: 204px;
     }
 }
 .main {
