@@ -12,8 +12,10 @@ class IssueController extends Controller
         $issues = Issue::where('areaID',$areaID)->get();
         return view('_partials.issues.lists',  compact('issues','areaID'))->render();
     }
-    
+
     public function show($id){
         $issue = Issue::find($id);
+        $currentIssue = Issue::find($id);
+        return view('_partials.issues.show',  compact('currentIssue'));
     }
 }

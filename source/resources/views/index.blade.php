@@ -21,10 +21,12 @@
     </div>
 </div>
 <div class="row issuesList" id="issuesListWrapper">
-    
+
 </div>
 <div id="infoContent">
-    
+</div>
+</div>
+<div class="row info"  id="issueDetail">
 </div>
 <script type="text/template" id="trIssuesTableTemplate">
     <tr onclick='Issue.getDetail(this,"{{route('issue.show')}}")'>
@@ -34,7 +36,7 @@
 @stop
 
 @section('js')
-    
+
 
     <script type="text/javascript">
     @foreach($areas as $area)
