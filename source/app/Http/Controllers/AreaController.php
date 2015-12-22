@@ -101,10 +101,9 @@ class AreaController extends Controller
             $file = $request->file('photo');
 
             $fileName = time().$file->getClientOriginalName();
-            
+
             $filePath = config('web.upload_path').$fileName;
 
-            return $filePath;
             $file->move(config('web.upload_path'), $fileName);
 
             return $filePath;

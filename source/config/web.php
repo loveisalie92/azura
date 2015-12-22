@@ -1,4 +1,4 @@
 <?php
 return [
-    'upload_path' =>  public_path('upload')
+    'upload_path' =>  public_path('uploads')
 ];
