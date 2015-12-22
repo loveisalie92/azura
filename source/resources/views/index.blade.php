@@ -26,7 +26,9 @@
 <div id="infoContent">
 </div>
 </div>
-<div class="row info"  id="issueDetail">
+<div class="container">
+    <div class="row info"  id="issueDetail">
+    </div>
 </div>
 <script type="text/template" id="trIssuesTableTemplate">
     <tr onclick='Issue.getDetail(this,"{{route('issue.show')}}")'>
