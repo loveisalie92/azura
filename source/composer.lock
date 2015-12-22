@@ -4,9 +4,63 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5c6026b96e6fa11a641b51a6ba976f5e",
-    "content-hash": "5bd58fd976f1ee3e9611bc37c006ec46",
+    "hash": "05151fff62fa44b9eba86788cf515cae",
+    "content-hash": "d07f97b3638e2511dc2c3f1e58bae6f7",
     "packages": [
+        {
+            "name": "barryvdh/laravel-debugbar",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-debugbar.git",
+                "reference": "25ce9052c89a262cfda1d410940a552efb9ae85c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/25ce9052c89a262cfda1d410940a552efb9ae85c",
+                "reference": "25ce9052c89a262cfda1d410940a552efb9ae85c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0.17|5.1.*|5.2.*",
+                "maximebf/debugbar": "~1.11.0",
+                "php": ">=5.4.0",
+                "symfony/finder": "~2.6|~3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Barryvdh\\Debugbar\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "PHP Debugbar integration for Laravel",
+            "keywords": [
+                "debug",
+                "debugbar",
+                "laravel",
+                "profiler",
+                "webprofiler"
+            ],
+            "time": "2015-12-21 19:07:38"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",
@@ -573,6 +627,67 @@
                 "storage"
             ],
             "time": "2015-12-19 20:16:43"
+        },
+        {
+            "name": "maximebf/debugbar",
+            "version": "v1.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maximebf/php-debugbar.git",
+                "reference": "07741d84d39d10f00551c94284cdefcc69703e77"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/07741d84d39d10f00551c94284cdefcc69703e77",
+                "reference": "07741d84d39d10f00551c94284cdefcc69703e77",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/log": "^1.0",
+                "symfony/var-dumper": "^2.6|^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0|^5.0"
+            },
+            "suggest": {
+                "kriswallsmith/assetic": "The best way to manage assets",
+                "monolog/monolog": "Log using Monolog",
+                "predis/predis": "Redis storage"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.11-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DebugBar\\": "src/DebugBar/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maxime Bouroumeau-Fuseau",
+                    "email": "maxime.bouroumeau@gmail.com",
+                    "homepage": "http://maximebf.com"
+                },
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "Debug bar in the browser for php application",
+            "homepage": "https://github.com/maximebf/php-debugbar",
+            "keywords": [
+                "debug",
+                "debugbar"
+            ],
+            "time": "2015-12-10 09:50:24"
         },
         {
             "name": "monolog/monolog",
@@ -1875,6 +1990,47 @@
     ],
     "packages-dev": [
         {
+            "name": "darsain/laravel-console",
+            "version": "dev-L5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/teepluss/laravel-console.git",
+                "reference": "8df5717ede4dd6cdc8ff09b7d8ec04f968d1ebb9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/teepluss/laravel-console/zipball/8df5717ede4dd6cdc8ff09b7d8ec04f968d1ebb9",
+                "reference": "8df5717ede4dd6cdc8ff09b7d8ec04f968d1ebb9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=5.0.1",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/controllers"
+                ],
+                "psr-0": {
+                    "Darsain\\Console\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Browser console for Laravel Framework.",
+            "keywords": [
+                "browser",
+                "console",
+                "laravel"
+            ],
+            "support": {
+                "source": "https://github.com/teepluss/laravel-console/tree/L5"
+            },
+            "time": "2015-09-07 04:09:46"
+        },
+        {
             "name": "doctrine/instantiator",
             "version": "1.0.5",
             "source": {
@@ -3102,7 +3258,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "darsain/laravel-console": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
