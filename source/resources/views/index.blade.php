@@ -17,6 +17,10 @@
 
     </div>
 </div>
+
+<div id="infoContent">
+
+</div>
 @stop
 
 @section('js')
@@ -29,6 +33,8 @@
             previewsContainer: '#preview',
             clickable: false,
             success: function (file, response) {
+                $('#infoContent').html('');
+                $('#infoContent').append(response);
             },
             error: function (file, response) {
             }
@@ -43,5 +49,6 @@
     $(document).ready(function (){
         onDragImage();
     });
+
     </script>
 @endsection

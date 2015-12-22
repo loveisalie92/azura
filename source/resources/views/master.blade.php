@@ -4,7 +4,7 @@
         <title>Main page</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" media="screen" href="{{ asset('assets/js/bootstrap.min.css') }}">
+        <link rel="stylesheet" media="screen" href="{{ asset('assets/css/bootstrap.min.css') }}">
         <link rel="stylesheet/less" type="text/css" href="{{ asset('assets/css/style.less') }}" />
         <script type="text/javascript" src="{{asset('assets/js/less.min.js')}}"></script>
         <script type="text/javascript">

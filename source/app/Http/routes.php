@@ -20,3 +20,8 @@ Route::post('upload', [
     'as' => 'photoUpload',
     'uses' => 'AreaController@photoUpload'
 ]);
+
+Route::get('show/{id}', [
+    'as' => 'issue.show',
+    'uses' => 'AreaController@showIssue'
+]);
