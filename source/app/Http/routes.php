@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get('/', [
     'as' => 'index',
     'uses' => 'AreaController@index'

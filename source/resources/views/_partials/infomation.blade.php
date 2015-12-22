@@ -1,7 +1,6 @@
 <div class="row issueList">
 
-    <div class="col-md-12">
-
+    <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-info">
             <div class="panel-heading">Issues:</div>
             <div class="panel-body issues">
@@ -65,24 +64,3 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    function onClickIssuesList() {
-        $('.issues tr').on('click', function () {
-            var id =$(this).attr('data-id');
-            var url = '{{ route('issue.show') }}';
-            $.ajax({
-                url : url.replace(/\%7Bid\%7D/,id),
-                method : 'get',
-                success : function (response) {
-                    $('.info').html('');
-                    $('.info').append(response);
-                }
-            });
-        });
-    }
-
-    $(document).ready(function () {
-        onClickIssuesList();
-    });
-</script>

@@ -1,4 +1,19 @@
-
+#ajax-notification {
+    left: 25%;
+    position: fixed;
+    top: 50px;
+    width: 50%;
+    z-index: 99999;
+    .alert {
+        font-size: 18px !important;
+        padding: 15px;
+        margin-bottom: 10px !important;
+        text-align:center !important;
+        a.close {
+            font-size: 14px !important;
+        }
+    }
+}
 .title {
     text-align: center;
 }
@@ -9,12 +24,6 @@
     margin:auto;
     margin-top: 100px;
     position: relative;
-    /**
-    > div,.living1,[class*="living"],[class*="terrace"] {
-        background: red;
-        opacity: .4;
-    }
-    **/
     > div:hover {
         border:3px dotted red;
         background: red;
@@ -131,6 +140,12 @@
         position: absolute;
         top: 163px;
         width: 204px;
+    }
+    .area{
+        .dz-drag-hover {
+            background:blue;
+            opacity:0.6;
+        }
     }
 }
 .main {

@@ -127,7 +127,6 @@ class AreaController extends Controller
             $filePath = config('web.uploadPath').$fileName;
 
             $file->move(config('web.uploadPath'), $fileName);
-
             $data = [
                 'areaID' => $id,
                 'photo' => $filePath,
@@ -146,13 +145,5 @@ class AreaController extends Controller
         }
 
 
-    }
-
-    public function showIssue($id)
-    {
-        $currentIssue = Issue::where('id', $id)->first();
-        // dd($currentIssue);
-
-        return view('_partials.issueDetail', compact('currentIssue'));
     }
 }
