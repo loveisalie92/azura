@@ -11,6 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [
+    'as' => 'index',
+    'uses' => 'AreaController@index'
+]);
+
+Route::post('upload', [
+    'as' => 'photoUpload',
+    'uses' => 'AreaController@photoUpload'
+]);
+
+Route::get('show/{id}', [
+    'as' => 'issue.show',
+    'uses' => 'AreaController@showIssue'
+]);
+
+Route::post('issue/{id}', [
+    'as' => 'issue.update',
+    'uses' => 'AreaController@update'
+]);
