@@ -15,4 +15,6 @@ class Issue extends Model
         'state', 'completedAt', 'createDatetime', 'ownerDatetime',
         'builderDatetime'
     ];
+
+    public $timestamps = false;
 }

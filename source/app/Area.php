@@ -10,4 +10,6 @@ class Area extends Model
     protected $table = 'areas';
 
     protected $fillable = ['name'];
+
+    public $timestamps = false;
 }
