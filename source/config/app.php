@@ -146,6 +146,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         'Darsain\Console\ConsoleServiceProvider',
         Barryvdh\Debugbar\ServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ],
 
     /*

@@ -16,8 +16,8 @@ class AreaController extends Controller
      */
     public function index()
     {
-        $areas = Area::all();
-
+        $areas = Area::getAreasWithWaitingIssues();
+        $a = Area::findOrNew(1);
         return view('index', compact('areas'));
     }
 
@@ -135,13 +135,11 @@ class AreaController extends Controller
 
             Issue::create($data);
 
-            $issues = Issue::where('areaID', $id)->get();
-
             $currentIssue = Issue::orderBy('ID', 'DESC')->first();
 
             $areaID = $id;
 
-            return view('_partials.infomation', compact('issues', 'areaID', 'currentIssue'));
+            return view('_partials.issues.show', compact('areaID', 'currentIssue'));
         }
 
 
