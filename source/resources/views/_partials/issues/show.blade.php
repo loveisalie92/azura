@@ -1,7 +1,7 @@
 
 <div class="col-md-12">
         <div class="panel panel-info">
-            <form action="{{ route('issue.update', [ 'id' => $currentIssue->ID ]) }}" method=post>
+            <form onsubmit="Area.update(this);return false;" action="{{ route('issue.update', [ 'id' => $currentIssue->ID ]) }}" method=post>
                 {!! csrf_field() !!}
               <div class="panel-heading">
                 <input type="checkbox" name="complete" value="1"

@@ -83,14 +83,12 @@ class AreaController extends Controller
             'ID' => $id,
             'ownerComment' => $request->input('ownerComment')
         ];
-
+        $issue = Issue::findOrFail($id);
         if(!$request->has('complete')) {
-            $issue = Issue::findOrFail($id);
-            // dd($issue);
             $issue->fill($data);
             $issue->save();
         }
-        
+        return response()->json($issue);
     }
 
     /**

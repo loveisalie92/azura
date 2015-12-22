@@ -105,7 +105,13 @@ Area.updateIssuesNumber = function(formID){
         $(formID).append('<label class="number-isuees">'+currentNumber+'</label>');
     }
 };
-
+Area.update = function(form){
+    var url = $(form).attr('action');
+    var data = $(form).serialize();
+    $.post(url,data,function(res){
+        App.showSuccessMessage("The issues has been updated success");
+    });
+};
 var Issue = Issue || {};
 Issue.getDetailDom  = function(){
     return $('#issueDetail');
