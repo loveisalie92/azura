@@ -135,13 +135,11 @@ class AreaController extends Controller
 
             Issue::create($data);
 
-            $issues = Issue::where('areaID', $id)->get();
-
             $currentIssue = Issue::orderBy('ID', 'DESC')->first();
 
             $areaID = $id;
 
-            return view('_partials.infomation', compact('issues', 'areaID', 'currentIssue'));
+            return view('_partials.infomation', compact('areaID', 'currentIssue'));
         }
 
 

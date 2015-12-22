@@ -20,13 +20,22 @@
 
     </div>
 </div>
-
-<div id="infoContent">
-
+<div class="row issuesList" id="issuesListWrapper">
+    
 </div>
+<div id="infoContent">
+    
+</div>
+<script type="text/template" id="trIssuesTableTemplate">
+    <tr onclick='Issue.getDetail(this,"{{route('issue.show')}}")'>
+        <td>[OWNER_COMMENT]</td>
+    </tr>
+</script>
 @stop
 
 @section('js')
+    
+
     <script type="text/javascript">
     @foreach($areas as $area)
         Dropzone.options.upload{{$area->ID}} = {
@@ -37,6 +46,7 @@
             success: function (file, response) {
                 $('#infoContent').html('');
                 $('#infoContent').append(response);
+                Area.updateIssuesList('#upload{{$area->ID}}',{{$area->ID}});
             },
             error: function (file, response) {
             }
