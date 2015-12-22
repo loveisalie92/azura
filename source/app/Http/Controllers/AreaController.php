@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Area;
+use App\Issue;
 
 class AreaController extends Controller
 {
@@ -96,19 +97,39 @@ class AreaController extends Controller
     public function photoUpload(Request $request)
     {
         $id = $request->input('id');
-
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
 
             $fileName = time().$file->getClientOriginalName();
 
-            $filePath = config('web.upload_path').$fileName;
+            $filePath = config('web.uploadPath').$fileName;
 
-            $file->move(config('web.upload_path'), $fileName);
+            $file->move(config('web.uploadPath'), $fileName);
 
-            return $filePath;
+
+
+            $data = [
+                'areaID' => $id,
+                'photo' => $filePath,
+                'ownerComment' => 'Not commend Yet'
+            ];
+
+            Issue::create($data);
+
+            $issues = Issue::where('areaID', $id)->get();
+
+            $currentIssue = Issue::orderBy('ID', 'DESC')->first();
+
+            $areaID = $id;
+
+            return view('_partials.infomation', compact('issues', 'areaID', 'currentIssue'));
         }
 
 
+    }
+
+    public function showIssue($id)
+    {
+        return 'issue infomation';
     }
 }

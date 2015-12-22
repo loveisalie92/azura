@@ -11,7 +11,7 @@ class Issue extends Model
     protected $dates = ['completedAt', 'createDatetime', 'ownerDatetime', 'builderDatetime'];
 
     protected $fillable = [
-        'areaId', 'photo', 'ownerComment', 'solution', 'builderComment',
+        'areaID', 'photo', 'ownerComment', 'solution', 'builderComment',
         'state', 'completedAt', 'createDatetime', 'ownerDatetime',
         'builderDatetime'
     ];
