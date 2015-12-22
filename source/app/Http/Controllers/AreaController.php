@@ -131,7 +131,7 @@ class AreaController extends Controller
 
             $areaID = $id;
 
-            return view('_partials.infomation', compact('areaID', 'currentIssue'));
+            return view('_partials.issues.show', compact('areaID', 'currentIssue'));
         }
 
 
