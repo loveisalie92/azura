@@ -24,7 +24,8 @@
     
 </div>
 <div id="infoContent">
-    
+</div>
+<div class="row info"  id="issueDetail">
 </div>
 <script type="text/template" id="trIssuesTableTemplate">
     <tr onclick='Issue.getDetail(this,"{{route('issue.show')}}")'>

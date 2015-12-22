@@ -1,5 +1,5 @@
-<div class="row info"  id="issueDetail">
-    <div class="col-md-12">
+
+<div class="col-md-12">
         <div class="panel panel-info">
             <form action="{{ route('issue.update', [ 'id' => $currentIssue->ID ]) }}" method=post>
                 {!! csrf_field() !!}
@@ -23,7 +23,6 @@
                             <option value="Repair">Repair</option>
                             <option value="Not Accepted">Not Accepted</option>
                         </select>
-
                     </div>
 
                     <div class="col-md-6 nopadding">
@@ -41,4 +40,3 @@
           </form>
         </div>
     </div>
-</div>

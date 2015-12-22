@@ -14,6 +14,7 @@ class IssueController extends Controller
     }
     
     public function show($id){
-        $issue = Issue::find($id);
+        $currentIssue = Issue::find($id);
+        return view('_partials.issues.show',  compact('currentIssue'));
     }
 }
