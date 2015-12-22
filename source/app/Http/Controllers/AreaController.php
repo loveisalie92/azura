@@ -84,21 +84,13 @@ class AreaController extends Controller
             'ownerComment' => $request->input('ownerComment')
         ];
 
-        Event::listen('illuminate.query', function ($sql) {
-            var_dump($sql);
-        });
-
         if(!$request->has('complete')) {
             $issue = Issue::findOrFail($id);
             // dd($issue);
-            $a = $issue->update($data);
-
-            dd($a);
-            //back to index page
-            $areas = Area::all();
-
-            return view('index', compact('areas'));
+            $issue->fill($data);
+            $issue->save();
         }
+        
     }
 
     /**
