@@ -2,6 +2,17 @@
 $.wait = function (callback, seconds) {
     return window.setTimeout(callback, seconds * 1000);
 };
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+$( document ).ajaxSend(function() {
+    $('body').addClass('loading');
+});
+$( document ).ajaxComplete(function() {
+    $('body').removeClass('loading');
+});
 var App = App || {};
 App.generateID = function () {
     var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('');
@@ -39,4 +50,33 @@ App.showErrorMessage = function (message, dom) {
             $('#' + id).remove();
         },4);
     }, 2);
+};
+
+var Area = Area || {};
+Area.getIssuesTable = function(){
+    return $('#issuesTable');
+}
+Area.getIssues = function(url){
+    $.ajax({
+        url : url,
+        method : 'get',
+        success : function (response) {
+           Area.getIssuesTable().find('tbody').html(response);
+        }
+    });
+};
+
+var Issue = Issue || {};
+Issue.getDetailDom  = function(){
+    return $('#issueDetail');
+};
+
+Issue.getDetail = function(dom,url){
+    $.ajax({
+        url : url,
+        method : 'get',
+        success : function (response) {
+            Issue.getDetailDom().html(response);
+        }
+    });
 };

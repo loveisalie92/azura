@@ -25,3 +25,5 @@ Route::get('show/{id}', [
     'as' => 'issue.show',
     'uses' => 'AreaController@showIssue'
 ]);
+
+Route::resource('issues', 'IssueController');

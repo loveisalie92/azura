@@ -15,8 +15,8 @@ class AreaController extends Controller
      */
     public function index()
     {
-        $areas = Area::all();
-
+        $areas = Area::getAreasWithWaitingIssues();
+        $a = Area::findOrNew(1);
         return view('index', compact('areas'));
     }
 
@@ -126,10 +126,5 @@ class AreaController extends Controller
         }
 
 
-    }
-
-    public function showIssue($id)
-    {
-        return 'issue infomation';
     }
 }
