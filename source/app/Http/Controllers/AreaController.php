@@ -89,4 +89,26 @@ class AreaController extends Controller
     {
         //
     }
+
+    /**
+     * Upload image from drag and drop
+     */
+    public function photoUpload(Request $request)
+    {
+        $id = $request->input('id');
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+
+            $fileName = time().$file->getClientOriginalName();
+
+            $filePath = config('web.upload_path').$fileName;
+
+            $file->move(config('web.upload_path'), $fileName);
+
+            return $filePath;
+        }
+
+
+    }
 }

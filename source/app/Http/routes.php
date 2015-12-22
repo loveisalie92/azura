@@ -15,3 +15,8 @@ Route::get('/', [
     'as' => 'index',
     'uses' => 'AreaController@index'
 ]);
+
+Route::post('upload', [
+    'as' => 'photoUpload',
+    'uses' => 'AreaController@photoUpload'
+]);
