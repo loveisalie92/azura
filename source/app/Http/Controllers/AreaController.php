@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Area;
 use App\Issue;
+use Event;
 
 class AreaController extends Controller
 {
@@ -76,7 +77,28 @@ class AreaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd($id);
+        //dd($request->all());
+        $data = [
+            'ID' => $id,
+            'ownerComment' => $request->input('ownerComment')
+        ];
+
+        Event::listen('illuminate.query', function ($sql) {
+            var_dump($sql);
+        });
+
+        if(!$request->has('complete')) {
+            $issue = Issue::findOrFail($id);
+            // dd($issue);
+            $a = $issue->update($data);
+
+            dd($a);
+            //back to index page
+            $areas = Area::all();
+
+            return view('index', compact('areas'));
+        }
     }
 
     /**
@@ -105,9 +127,6 @@ class AreaController extends Controller
             $filePath = config('web.uploadPath').$fileName;
 
             $file->move(config('web.uploadPath'), $fileName);
-
-
-
             $data = [
                 'areaID' => $id,
                 'photo' => $filePath,

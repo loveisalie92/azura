@@ -27,3 +27,8 @@ Route::get('show/{id}', [
 ]);
 
 Route::resource('issues', 'IssueController');
+
+Route::post('issue/{id}', [
+    'as' => 'issue.update',
+    'uses' => 'AreaController@update'
+]);

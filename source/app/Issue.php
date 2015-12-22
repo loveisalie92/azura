@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Issue extends Model
 {
+    protected $primaryKey = 'ID';
     protected $table = 'issues';
 
     protected $dates = ['completedAt', 'createDatetime', 'ownerDatetime', 'builderDatetime'];
