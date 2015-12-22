@@ -1,6 +1,7 @@
+<div id="infoContent">
 <div class="row issueList">
 
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-12">
         <div class="panel panel-info">
             <div class="panel-heading">Issues:</div>
             <div class="panel-body issues">
@@ -63,4 +64,6 @@
           </form>
         </div>
     </div>
+</div>
+
 </div>
