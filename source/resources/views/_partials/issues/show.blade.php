@@ -3,13 +3,11 @@
         <div class="panel panel-info">
             <form onsubmit="Area.update(this);return false;" action="{{ route('issue.update', [ 'id' => $currentIssue->ID ]) }}" method=post>
                 {!! csrf_field() !!}
+               @if($role == 'owner')
               <div class="panel-heading">
-                <input type="checkbox" name="complete" value="1"
-                @if($currentIssue->state == 1)
-                    checked
-                @endif
-                >Complete
+                <input type="checkbox" name="complete" value="1" @if($currentIssue->state == 1) checked @endif /> Complete
               </div>
+               @endif
               <div class="panel-body">
                     <img src='{{ asset("$currentIssue->photo") }}' alt="" width="800px">
                     <h4 style="margin-top: 20px;margin-bottom: 10px;">Owner comment:</h4>
