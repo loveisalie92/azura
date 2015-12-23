@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Issue extends Model
@@ -22,9 +23,13 @@ class Issue extends Model
     ];
 
     public $timestamps = false;
-    
+
     public function scopeAvailable($query)
     {
         return $query->where('state', '!=',self::DELETE_STATE);
+    }
+
+    public function setBuilderDatetimeAttribute($value){
+        $this->attributes['builderDatetime'] =  Carbon::createFromFormat('m/d/Y',$value)->format('Y-m-d H:i:s');
     }
 }

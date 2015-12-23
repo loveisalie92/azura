@@ -11,20 +11,27 @@
               <div class="panel-body">
                     <img src='{{ asset("$currentIssue->photo") }}' alt="" width="800px">
                     <h4 style="margin-top: 20px;margin-bottom: 10px;">Owner comment:</h4>
+                    @if ($role == 'owner')
                     <textarea name="ownerComment" id="input" class="form-control" rows="5" placeholder="Leave your comment here">{{ $currentIssue->ownerComment }}</textarea>
+                    @else
+                    <textarea name="ownerComment" id="input" class="form-control" rows="5" placeholder="Leave your comment here" disabled>{{ $currentIssue->ownerComment }}</textarea>
+                    @endif
                     <h4 style="margin-top: 20px;margin-bottom: 10px;">Builder solution:</h4>
                     <div class="row" style="margin-bottom: 20px">
                         <div class="col-md-6">
                             <select name="solution" id="" class="form-control">
-                                <option value="Blank" disabled="" selected="">Blank</option>
-                                <option value="Replace">Replace</option>
-                                <option value="Repair">Repair</option>
-                                <option value="Not Accepted">Not Accepted</option>
+                                <option value="Blank" disabled="" @if($currentIssue->solution == 'Blank') checked @endif>Blank</option>
+                                <option value="Replace" @if($currentIssue->solution == 'Replace') checked @endif>Replace</option>
+                                <option value="Repair" @if($currentIssue->solution == 'Repair') checked @endif>Repair</option>
+                                <option value="Not Accepted" @if($currentIssue->solution == 'Not Accepted') checked @endif>Not Accepted</option>
                             </select>
                         </div>
 
                         <div class="col-md-6">
-                            <input type="text" name="builderDatetime" id="input" class="form-control datepicker" value="">
+                            <input type="text" name="builderDatetime" id="input" class="form-control datepicker" value="{{date('m/d/Y')}}">
+                            <script type="text/javascript">
+                            
+                            </script>
                         </div>
                     </div>
                     <textarea  name="builderComment" id="input" class="form-control" rows="5" placeholder="Leave your comment here">{{ $currentIssue->builderComment }}</textarea>

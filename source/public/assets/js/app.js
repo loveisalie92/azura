@@ -5,7 +5,7 @@ $.wait = function (callback, seconds) {
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-        'role': $('meta[name="role"]').attr('content')
+        'role': $('meta[name="csrf-token"]').attr('content')
     }
 });
 $( document ).ajaxSend(function() {
@@ -124,6 +124,7 @@ Area.update = function(form){
 Area.hideIssueForm = function(){
     Area.getissueDetailDom().html('');
 };
+
 var Issue = Issue || {};
 Issue.getDetailDom  = function(){
     return $('#issueDetail');
@@ -135,6 +136,10 @@ Issue.getDetail = function(dom,url){
         method : 'get',
         success : function (response) {
             Issue.getDetailDom().html(response);
+            $.wait(function(){
+                //console.log(Issue.getDetailDom().find('.datepicker'));
+                Issue.bindDatepicker(Issue.getDetailDom().find('.datepicker'));
+            },0.5);
         }
     });
 };
@@ -158,3 +163,8 @@ Issue.updateIssueListAfterDelete = function (id) {
     var dom = Area.getIssuesWrapper().find('table td[data-id="'+id+'"]').parents('tr');
     dom.remove();
 }
+Issue.bindDatepicker = function(dom) {
+    $(dom).datepicker({
+        format: 'mm/dd/yyyy'
+    });
+};
