@@ -7,10 +7,11 @@
         <div class="{{ $area->name }} area" style="{{ $area->position }}" onclick="Area.getIssues('{{route('issues.index').'?areaID='.$area->ID}}')">
             <form class="dropzone" id="upload{{$area->ID}}" action="{{ route('photoUpload') }}" method="post" style="width:100%;height:100%;">
                 {!! csrf_field() !!}
-                @if($area->issuesCount)
+                @if($area->issuesCount && 0)
                 <label class="number-isuees">{{$area->issuesCount}}</label>
                 @endif
                 <input type="hidden" name="id" value="{{ $area->ID }}">
+                <div class="dz-message" data-dz-message><span></span></div>
             </form>
         </div>
 

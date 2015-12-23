@@ -85,12 +85,12 @@ Area.updateIssuesList = function(areaFormDom,areaID){
             success : function (response) {
                Area.getIssuesWrapper().html(response);
                $.wait(function(){
-                   Area.updateIssuesNumber(areaFormDom);
+                  // Area.updateIssuesNumber(areaFormDom);
                },1);
             }
         });
     }
-   
+
 };
 Area.updateIssuesNumber = function(formID){
     var numberIssue = $(formID).find('.number-isuees').text();
