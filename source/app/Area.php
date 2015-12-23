@@ -8,10 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Area extends Model
 {
 
-    const DELETE_STATUS = -1;
-    const WAITING_STATUS = 0;
-    const COMPLETE_STATUS = 1;
-
+   
     protected $table = 'areas';
 
     protected $fillable = ['name'];
@@ -19,8 +16,12 @@ class Area extends Model
     public $timestamps = false;
     
     public static function getAreasWithWaitingIssues(){
-        $waitingStatus = intval(self::WAITING_STATUS);
+        $waitingStatus = intval(Issue::WAITING_STATE);
         $countIssue = "(SELECT COUNT(`issues`.`ID`) FROM issues WHERE `issues`.`areaID` = `areas`.`ID` AND `issues`.`state` = $waitingStatus)";
         return Area::select(DB::raw("areas.*,$countIssue as `issuesCount`"))->get();
+    }
+    
+    public function getStringNameAttribute(){
+        return ucfirst(str_replace('-',' ',$this->name));
     }
 }

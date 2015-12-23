@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Area;
 use App\Issue;
-use Event;
-
+use Carbon\Carbon;
 class AreaController extends Controller
 {
     /**
@@ -17,7 +16,6 @@ class AreaController extends Controller
     public function index()
     {
         $areas = Area::getAreasWithWaitingIssues();
-        $a = Area::findOrNew(1);
         return view('index', compact('areas'));
     }
 
@@ -79,15 +77,16 @@ class AreaController extends Controller
     {
         //dd($id);
         //dd($request->all());
-        $data = [
-            'ID' => $id,
-            'ownerComment' => $request->input('ownerComment')
-        ];
+        
         $issue = Issue::findOrFail($id);
-        if(!$request->has('complete')) {
-            $issue->fill($data);
-            $issue->save();
+        $data = $request->all();
+        if($request->has('complete')) {
+            $data['state'] = Issue::COMPLETE_STATE;
+            $data['completedAt'] = date('Y-m-d H:i:s');
+            $data['ownerDatetime'] = date('Y-m-d H:i:s');
         }
+        $issue->fill($data);
+        $issue->save();
         return response()->json($issue);
     }
 
