@@ -4,7 +4,8 @@ $.wait = function (callback, seconds) {
 };
 $.ajaxSetup({
     headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        'role': $('meta[name="role"]').attr('content')
     }
 });
 $( document ).ajaxSend(function() {
@@ -137,3 +138,23 @@ Issue.getDetail = function(dom,url){
         }
     });
 };
+
+Issue.delete = function (url) {
+    $.ajax({
+        url : url,
+        method : 'post',
+        data : {
+            _method : 'delete'
+        },
+        success : function (response) {
+            App.showSuccessMessage("The issues has been deleted");
+            Issue.updateIssueListAfterDelete(response.ID);
+            Area.hideIssueForm();
+        }
+    });
+};
+
+Issue.updateIssueListAfterDelete = function (id) {
+    var dom = Area.getIssuesWrapper().find('table td[data-id="'+id+'"]').parents('tr');
+    dom.remove();
+}

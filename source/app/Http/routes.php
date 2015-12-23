@@ -11,6 +11,9 @@
 |
 */
 $role = Request::query('role');
+if(!$role){
+    $role = 'builder';
+}
 View::share('role', $role);
 Route::get('/', [
     'as' => 'index',
