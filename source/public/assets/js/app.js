@@ -142,7 +142,14 @@ Issue.getDetail = function(dom,url){
             },0.5);
         }
     });
+
+    Issue.hightLightCurrentIssue(dom);
 };
+
+Issue.hightLightCurrentIssue = function(dom) {
+    $('.issues tr').removeClass('active-issue');
+    $(dom).addClass('active-issue');
+}
 
 Issue.delete = function (url) {
     $.ajax({
