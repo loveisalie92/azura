@@ -4,7 +4,8 @@ $.wait = function (callback, seconds) {
 };
 $.ajaxSetup({
     headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        'role': $('meta[name="role"]').attr('content')
     }
 });
 $( document ).ajaxSend(function() {

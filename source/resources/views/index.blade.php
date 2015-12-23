@@ -10,6 +10,7 @@
                 @if($area->issuesCount && 0)
                 <label class="number-isuees">{{$area->issuesCount}}</label>
                 @endif
+                <input type="hidden" name="role" value="{{ $role }}">
                 <input type="hidden" name="id" value="{{ $area->ID }}">
                 <div class="dz-message" data-dz-message><span></span></div>
             </form>
