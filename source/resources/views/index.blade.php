@@ -54,8 +54,8 @@
                 $('#issueDetail').append(response);
                 Area.updateIssuesList('#upload{{$area->ID}}',{{$area->ID}});
                 $.wait(function(){
-                    //console.log(Issue.getDetailDom().find('.datepicker'));
                     Issue.bindDatepicker(Issue.getDetailDom().find('.datepicker'));
+                    Issue.goToOwnerComment();
                 },0.5)
             },
             error: function (file, response) {

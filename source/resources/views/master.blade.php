@@ -26,9 +26,6 @@
         <script src="{{ asset('assets/js/bootstrap-datepicker.js') }}"></script>
         <script src="{{ asset('assets/js/dropzone.js') }}"></script>
         <script src="{{ asset('assets/js/app.js') }}"></script>
-        <script type="text/javascript">
-            
-        </script>
         @yield('js')
     </body>
 </html>
