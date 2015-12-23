@@ -10,7 +10,8 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+$role = Request::query('role');
+View::share('role', $role);
 Route::get('/', [
     'as' => 'index',
     'uses' => 'AreaController@index'
