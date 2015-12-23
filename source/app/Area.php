@@ -23,4 +23,8 @@ class Area extends Model
         $countIssue = "(SELECT COUNT(`issues`.`ID`) FROM issues WHERE `issues`.`areaID` = `areas`.`ID` AND `issues`.`state` = $waitingStatus)";
         return Area::select(DB::raw("areas.*,$countIssue as `issuesCount`"))->get();
     }
+    
+    public function getStringNameAttribute(){
+        return ucfirst(str_replace('-',' ',$this->name));
+    }
 }

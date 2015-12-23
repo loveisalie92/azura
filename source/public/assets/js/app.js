@@ -109,6 +109,7 @@ Area.update = function(form){
     var url = $(form).attr('action');
     var data = $(form).serialize();
     $.post(url,data,function(res){
+        Area.getIssuesWrapper().find('table td[data-id="'+res.ID+'"]').text(res.ownerComment);
         App.showSuccessMessage("The issues has been updated success");
     });
 };

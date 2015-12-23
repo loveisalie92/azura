@@ -18,4 +18,6 @@ class Issue extends Model
     ];
 
     public $timestamps = false;
+    
+   
 }
