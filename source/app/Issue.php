@@ -23,5 +23,8 @@ class Issue extends Model
 
     public $timestamps = false;
     
-   
+    public function scopeAvailable($query)
+    {
+        return $query->where('state', '!=',self::DELETE_STATE);
+    }
 }

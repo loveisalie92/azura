@@ -55,7 +55,10 @@ App.showErrorMessage = function (message, dom) {
 var Area = Area || {};
 Area.getIssuesWrapper = function(){
     return $('#issuesListWrapper');
-}
+};
+Area.getissueDetailDom = function(){
+    return $('#issueDetail');
+};
 Area.getIssues = function(url){
     $.ajax({
         url : url,
@@ -67,7 +70,7 @@ Area.getIssues = function(url){
 };
 Area.updateIssuesList = function(areaFormDom,areaID){
     var html = $('#trIssuesTableTemplate').html();
-    console.log(html);
+    //console.log(html);
     html = html.replace(/\%7Bid\%7D/,areaID);
     html = html.replace(/\[OWNER_COMMENT\]/,"No comment yet");
     // check if current area is  area that is uploading image
@@ -94,8 +97,8 @@ Area.updateIssuesList = function(areaFormDom,areaID){
 };
 Area.updateIssuesNumber = function(formID){
     var numberIssue = $(formID).find('.number-isuees').text();
-     console.log(formID);
-    console.log(numberIssue);
+    //console.log(formID);
+    //console.log(numberIssue);
     var currentNumber = 0;
     if(numberIssue){
         currentNumber = parseInt(numberIssue) + 1;
@@ -116,6 +119,9 @@ Area.update = function(form){
         }
         App.showSuccessMessage("The issues has been updated success");
     });
+};
+Area.hideIssueForm = function(){
+    Area.getissueDetailDom().html('');
 };
 var Issue = Issue || {};
 Issue.getDetailDom  = function(){
@@ -141,12 +147,13 @@ Issue.delete = function (url) {
         },
         success : function (response) {
             App.showSuccessMessage("The issues has been deleted");
-            Issue.updateIssueListAfterDelete(3);
+            Issue.updateIssueListAfterDelete(response.ID);
+            Area.hideIssueForm();
         }
     });
 };
 
 Issue.updateIssueListAfterDelete = function (id) {
-    var dom = Area.getIssuesWrapper().find('table td[data-id="'+id+'"]').parents('tr').remove();
+    var dom = Area.getIssuesWrapper().find('table td[data-id="'+id+'"]').parents('tr');
     dom.remove();
 }
