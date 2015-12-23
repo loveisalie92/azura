@@ -66,6 +66,9 @@ Area.getIssues = function(url){
         method : 'get',
         success : function (response) {
            Area.getIssuesWrapper().html(response);
+           $('html, body').animate({
+               scrollTop: Area.getIssuesWrapper().offset().top
+           }, 500);
         }
     });
 };
@@ -78,9 +81,9 @@ Area.updateIssuesList = function(areaFormDom,areaID){
     var currentDom = $('#issuesTable[data-areaID="'+areaID+'"]');
     if(currentDom.length){ //current
         currentDom.find('tbody').append(html);
-        $.wait(function(){
-            Area.updateIssuesNumber(areaFormDom);
-        },1);
+        // $.wait(function(){
+        //     Area.updateIssuesNumber(areaFormDom);
+        // },1);
     }else{
         var url = baseUrl + 'issues/?areaID='+areaID;
         $.ajax({
@@ -139,11 +142,14 @@ Issue.getDetail = function(dom,url){
             $.wait(function(){
                 //console.log(Issue.getDetailDom().find('.datepicker'));
                 Issue.bindDatepicker(Issue.getDetailDom().find('.datepicker'));
+                // window.location.hash = '#issueDetail [name="ownerComment"]';
+                Issue.goToOwnerComment ();
             },0.5);
         }
     });
 
     Issue.hightLightCurrentIssue(dom);
+
 };
 
 Issue.hightLightCurrentIssue = function(dom) {
@@ -174,4 +180,14 @@ Issue.bindDatepicker = function(dom) {
     $(dom).datepicker({
         format: 'mm/dd/yyyy'
     });
+};
+Issue.goToOwnerComment = function(){
+    $('html, body').animate({
+        scrollTop: Issue.getDetailDom().find('[name="ownerComment"]').offset().top
+    }, 500);
+    Issue.getDetailDom().find('[name="ownerComment"]').focus();
+};
+
+Issue.closeDetailPanel = function() {
+    Issue.getDetailDom().html('');
 };
