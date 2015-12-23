@@ -77,7 +77,7 @@ class AreaController extends Controller
     {
         //dd($id);
         //dd($request->all());
-        
+
         $issue = Issue::findOrFail($id);
         $data = $request->all();
         if($request->has('complete')) {
@@ -108,6 +108,7 @@ class AreaController extends Controller
     public function photoUpload(Request $request)
     {
         $id = $request->input('id');
+        $role = $request->input('role');
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
 
@@ -128,7 +129,7 @@ class AreaController extends Controller
 
             $areaID = $id;
 
-            return view('_partials.issues.show', compact('areaID', 'currentIssue'));
+            return view('_partials.issues.show', compact('areaID', 'currentIssue','role'));
         }
 
 

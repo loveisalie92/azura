@@ -4,7 +4,8 @@ $.wait = function (callback, seconds) {
 };
 $.ajaxSetup({
     headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        'role': $('meta[name="csrf-token"]').attr('content')
     }
 });
 $( document ).ajaxSend(function() {
@@ -65,6 +66,9 @@ Area.getIssues = function(url){
         method : 'get',
         success : function (response) {
            Area.getIssuesWrapper().html(response);
+           $('html, body').animate({
+               scrollTop: Area.getIssuesWrapper().offset().top
+           }, 500);
         }
     });
 };
@@ -77,9 +81,9 @@ Area.updateIssuesList = function(areaFormDom,areaID){
     var currentDom = $('#issuesTable[data-areaID="'+areaID+'"]');
     if(currentDom.length){ //current
         currentDom.find('tbody').append(html);
-        $.wait(function(){
-            Area.updateIssuesNumber(areaFormDom);
-        },1);
+        // $.wait(function(){
+        //     Area.updateIssuesNumber(areaFormDom);
+        // },1);
     }else{
         var url = baseUrl + 'issues/?areaID='+areaID;
         $.ajax({
@@ -123,6 +127,7 @@ Area.update = function(form){
 Area.hideIssueForm = function(){
     Area.getissueDetailDom().html('');
 };
+
 var Issue = Issue || {};
 Issue.getDetailDom  = function(){
     return $('#issueDetail');
@@ -134,6 +139,55 @@ Issue.getDetail = function(dom,url){
         method : 'get',
         success : function (response) {
             Issue.getDetailDom().html(response);
+            $.wait(function(){
+                //console.log(Issue.getDetailDom().find('.datepicker'));
+                Issue.bindDatepicker(Issue.getDetailDom().find('.datepicker'));
+                // window.location.hash = '#issueDetail [name="ownerComment"]';
+                Issue.goToOwnerComment ();
+            },0.5);
         }
     });
+
+    Issue.hightLightCurrentIssue(dom);
+
+};
+
+Issue.hightLightCurrentIssue = function(dom) {
+    $('.issues tr').removeClass('active-issue');
+    $(dom).addClass('active-issue');
+}
+
+Issue.delete = function (url) {
+    $.ajax({
+        url : url,
+        method : 'post',
+        data : {
+            _method : 'delete'
+        },
+        success : function (response) {
+            App.showSuccessMessage("The issues has been deleted");
+            Issue.updateIssueListAfterDelete(response.ID);
+            Area.hideIssueForm();
+        }
+    });
+};
+
+Issue.updateIssueListAfterDelete = function (id) {
+    var dom = Area.getIssuesWrapper().find('table td[data-id="'+id+'"]').parents('tr');
+    dom.remove();
+}
+Issue.bindDatepicker = function(dom) {
+    $(dom).datepicker({
+        format: 'mm/dd/yyyy'
+    });
+};
+Issue.goToOwnerComment = function(){
+    $('html, body').animate({
+        scrollTop: Issue.getDetailDom().find('[name="ownerComment"]').offset().top
+    }, 500);
+    Issue.getDetailDom().find('[name="ownerComment"]').focus();
+};
+
+Issue.closeDetailPanel = function() {
+    Issue.getDetailDom().html('');
 };

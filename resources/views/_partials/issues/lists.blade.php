@@ -5,7 +5,7 @@
             <table class="table table-hover" id="issuesTable" data-areaID="{{$area->ID}}">
             <tbody>
                 @foreach($issues as $issue)
-                    <tr onclick='Issue.getDetail(this,"{{route('issues.show',['id'=>$issue->ID])}}")'>
+                    <tr onclick='Issue.getDetail(this,"{{route('issues.show',['id'=>$issue->ID])}}?role={{$role}}")'>
                         <td data-id="{{$issue->ID}}">{{ $issue->ownerComment }}</td>
                     </tr>
                 @endforeach

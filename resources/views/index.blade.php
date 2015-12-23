@@ -4,12 +4,13 @@
 <div class="map">
     @foreach($areas as $area)
 
-        <div class="{{ $area->name }} area" style="{{ $area->position }}" onclick="Area.getIssues('{{route('issues.index').'?areaID='.$area->ID}}')">
+        <div class="{{ $area->name }} area" style="{{ $area->position }}" onclick="Area.getIssues('{{route('issues.index').'?areaID='.$area->ID.'&role='.$role}}')">
             <form class="@if($role == 'owner') dropzone @endif" id="upload{{$area->ID}}" action="{{ route('photoUpload') }}" method="post" style="width:100%;height:100%;">
                 {!! csrf_field() !!}
                 @if($area->issuesCount && 0)
                 <label class="number-isuees">{{$area->issuesCount}}</label>
                 @endif
+                <input type="hidden" name="role" value="{{ $role }}">
                 <input type="hidden" name="id" value="{{ $area->ID }}">
                 <div class="dz-message" data-dz-message><span></span></div>
             </form>
@@ -52,6 +53,10 @@
                 $('#issueDetail').html('');
                 $('#issueDetail').append(response);
                 Area.updateIssuesList('#upload{{$area->ID}}',{{$area->ID}});
+                $.wait(function(){
+                    Issue.bindDatepicker(Issue.getDetailDom().find('.datepicker'));
+                    Issue.goToOwnerComment();
+                },0.5)
             },
             error: function (file, response) {
             }
