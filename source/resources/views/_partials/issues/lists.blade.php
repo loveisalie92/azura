@@ -1,4 +1,4 @@
-<div class="col-md-6 col-md-offset-3">
+<div class="col-md-12">
     <div class="panel panel-info">
         <div class="panel-heading">Issues for {{$area->stringName}}</div>
         <div class="panel-body issues">

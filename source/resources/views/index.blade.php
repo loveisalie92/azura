@@ -49,8 +49,8 @@
             previewsContainer: '#preview',
             clickable: false,
             success: function (file, response) {
-                $('#infoContent').html('');
-                $('#infoContent').append(response);
+                $('#issueDetail').html('');
+                $('#issueDetail').append(response);
                 Area.updateIssuesList('#upload{{$area->ID}}',{{$area->ID}});
             },
             error: function (file, response) {
