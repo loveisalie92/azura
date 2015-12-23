@@ -11,7 +11,7 @@ class IssueController extends Controller
     public function index(GetIssueOfAreaRequest $request){
         $areaID = $request->input('areaID');
         $area = Area::findOrFail($areaID);
-        $issues = Issue::where('areaID',$areaID)->get();
+        $issues = Issue::where('areaID',$areaID)->available()->get();
         return view('_partials.issues.lists',  compact('issues','area'))->render();
     }
 

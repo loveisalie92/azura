@@ -70,7 +70,7 @@ Area.getIssues = function(url){
 };
 Area.updateIssuesList = function(areaFormDom,areaID){
     var html = $('#trIssuesTableTemplate').html();
-    console.log(html);
+    //console.log(html);
     html = html.replace(/\%7Bid\%7D/,areaID);
     html = html.replace(/\[OWNER_COMMENT\]/,"No comment yet");
     // check if current area is  area that is uploading image
@@ -97,8 +97,8 @@ Area.updateIssuesList = function(areaFormDom,areaID){
 };
 Area.updateIssuesNumber = function(formID){
     var numberIssue = $(formID).find('.number-isuees').text();
-     console.log(formID);
-    console.log(numberIssue);
+    //console.log(formID);
+    //console.log(numberIssue);
     var currentNumber = 0;
     if(numberIssue){
         currentNumber = parseInt(numberIssue) + 1;
@@ -121,7 +121,6 @@ Area.update = function(form){
     });
 };
 Area.hideIssueForm = function(){
-    console.log( Area.getissueDetailDom());
     Area.getissueDetailDom().html('');
 };
 var Issue = Issue || {};
