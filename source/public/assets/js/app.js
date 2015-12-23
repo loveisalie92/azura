@@ -55,7 +55,10 @@ App.showErrorMessage = function (message, dom) {
 var Area = Area || {};
 Area.getIssuesWrapper = function(){
     return $('#issuesListWrapper');
-}
+};
+Area.getissueDetailDom = function(){
+    return $('#issueDetail');
+};
 Area.getIssues = function(url){
     $.ajax({
         url : url,
@@ -116,6 +119,10 @@ Area.update = function(form){
         }
         App.showSuccessMessage("The issues has been updated success");
     });
+};
+Area.hideIssueForm = function(){
+    console.log( Area.getissueDetailDom());
+    Area.getissueDetailDom().html('');
 };
 var Issue = Issue || {};
 Issue.getDetailDom  = function(){
