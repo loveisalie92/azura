@@ -31,10 +31,11 @@
                     </div>
 
                     <textarea name="builderComment" id="input" class="form-control" rows="5" placeholder="Leave your comment here">{{ $currentIssue->builderComment }}</textarea>
-
-                    <div class="col-md-4 nopadding"><button type="button" class="btn btn-danger btn-block">Delete</button></div>
-                    <div class="col-md-4 nopadding"><button type="button" class="btn btn-info btn-block">Cancel</button></div>
-                    <div class="col-md-4 nopadding"><button type="submit" class="btn btn-primary btn-block">Submit</button></div>
+                    <div class="clearfix issueActions">
+                        <button type="submit" class="btn btn-primary  pull-right">Submit</button>
+                        <button type="button" class="btn btn-danger  pull-right">Delete</button>
+                        <button type="button" class="btn btn-default  pull-right">Cancel</button>
+                    </div>
 
               </div>
           </form>
