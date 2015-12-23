@@ -131,3 +131,22 @@ Issue.getDetail = function(dom,url){
         }
     });
 };
+
+Issue.delete = function (url) {
+    $.ajax({
+        url : url,
+        method : 'post',
+        data : {
+            _method : 'delete'
+        },
+        success : function (response) {
+            App.showSuccessMessage("The issues has been deleted");
+            Issue.updateIssueListAfterDelete(3);
+        }
+    });
+};
+
+Issue.updateIssueListAfterDelete = function (id) {
+    var dom = Area.getIssuesWrapper().find('table td[data-id="'+id+'"]').parents('tr').remove();
+    dom.remove();
+}

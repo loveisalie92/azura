@@ -33,7 +33,7 @@
                     <textarea name="builderComment" id="input" class="form-control" rows="5" placeholder="Leave your comment here">{{ $currentIssue->builderComment }}</textarea>
                     <div class="clearfix issueActions">
                         <button type="submit" class="btn btn-primary  pull-right">Submit</button>
-                        <button type="button" class="btn btn-danger  pull-right">Delete</button>
+                        <button type="button" class="btn btn-danger  pull-right" onclick="Issue.delete('{{route('issues.destroy', ['id' => $currentIssue->ID])}}')">Delete</button>
                         <button type="button" class="btn btn-default  pull-right">Cancel</button>
                     </div>
 

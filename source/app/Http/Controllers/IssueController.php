@@ -20,4 +20,14 @@ class IssueController extends Controller
         $currentIssue = Issue::find($id);
         return view('_partials.issues.show',  compact('currentIssue'));
     }
+
+    public function destroy($id)
+    {
+        $issue = Issue::findOrFail($id);
+
+        $issue->state = -1;
+        $issue->ownerDatetime = date('Y-m-d');
+
+        $issue->save();
+    }
 }
