@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddPositionToAreasTable' => $baseDir . '/database/migrations/2015_12_22_021532_add_position_to_areas_table.php',
+    'AddSolveonColumnToIssuesTable' => $baseDir . '/database/migrations/2015_12_23_005115_add_solveon_column_to_issues_table.php',
     'App\\Area' => $baseDir . '/app/Area.php',
     'App\\Console\\Commands\\Inspire' => $baseDir . '/app/Console/Commands/Inspire.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
@@ -16,11 +17,13 @@ return array(
     'App\\Http\\Controllers\\Auth\\AuthController' => $baseDir . '/app/Http/Controllers/Auth/AuthController.php',
     'App\\Http\\Controllers\\Auth\\PasswordController' => $baseDir . '/app/Http/Controllers/Auth/PasswordController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\IssueController' => $baseDir . '/app/Http/Controllers/IssueController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
     'App\\Http\\Middleware\\RedirectIfAuthenticated' => $baseDir . '/app/Http/Middleware/RedirectIfAuthenticated.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Http\\Requests\\GetIssueOfAreaRequest' => $baseDir . '/app/Http/Requests/GetIssueOfAreaRequest.php',
     'App\\Http\\Requests\\Request' => $baseDir . '/app/Http/Requests/Request.php',
     'App\\Issue' => $baseDir . '/app/Issue.php',
     'App\\Jobs\\Job' => $baseDir . '/app/Jobs/Job.php',
