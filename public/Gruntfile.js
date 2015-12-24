@@ -22,7 +22,7 @@
                 files : {
                     './assets/js/site.js' :   [
                         './assets/js/jquery-1.11.3.js',
-                        './assets/js/bootstrap.min.js',
+                        './assets/js/bootstrap.js',
                         './assets/js/bootstrap-datepicker.js',
                         './assets/js/dropzone.js',
                         './assets/js/app.js'
