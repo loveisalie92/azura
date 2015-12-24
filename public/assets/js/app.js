@@ -9,7 +9,7 @@ $.ajaxSetup({
     }
 });
 $( document ).ajaxSend(function() {
-    $('body').addClass('loading');
+   // $('body').addClass('loading');
 });
 $( document ).ajaxComplete(function() {
     $('body').removeClass('loading');
@@ -69,6 +69,8 @@ Area.getIssues = function(url){
            $('html, body').animate({
                scrollTop: Area.getIssuesWrapper().offset().top
            }, 500);
+           
+                Issue.closeDetailPanel();
         }
     });
 };
