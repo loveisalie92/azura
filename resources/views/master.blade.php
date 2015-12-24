@@ -21,6 +21,7 @@
         <div class="container">
             @yield('content')
         </div>
+        
         <script src="{{ asset('assets/js/jquery-1.11.3.js') }}"></script>
         <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('assets/js/bootstrap-datepicker.js') }}"></script>
