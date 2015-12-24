@@ -11,8 +11,6 @@
 |
 */
 $role = Request::query('role');
-$isDebug = config('app.debug');
-View::share('isDebug',$isDebug);
 if(!$role){
     $role = 'builder';
 }
