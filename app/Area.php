@@ -24,4 +24,8 @@ class Area extends Model
     public function getStringNameAttribute(){
         return ucfirst(str_replace('-',' ',$this->name));
     }
+    
+    public function issues(){
+        return $this->hasMany('App\Issue','areaID',"ID");
+    }
 }

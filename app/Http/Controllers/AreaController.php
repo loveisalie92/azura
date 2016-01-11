@@ -117,10 +117,16 @@ class AreaController extends Controller
             $filePath = config('web.uploadPath').$fileName;
 
             $file->move(config('web.uploadPath'), $fileName);
+//            $lasterIssue = Issue::select('ID')->where('areaID',$id)->orderBy('id','DESC')->first();
+//            if($lasterIssue){
+//                $comment = "Issue #".$lasterIssue->ID;
+//            }else{
+//                $comment = "Issue #1";
+//            }
             $data = [
                 'areaID' => $id,
                 'photo' => $filePath,
-                'ownerComment' => 'Not commend Yet'
+                'ownerComment' => "New issue"
             ];
 
             Issue::create($data);

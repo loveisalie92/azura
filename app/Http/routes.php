@@ -36,3 +36,8 @@ Route::post('issue/{id}', [
     'as' => 'issue.update',
     'uses' => 'AreaController@update'
 ]);
+
+Route::get('report', [
+    'as' => 'report',
+    'uses' => 'IssueController@report'
+]);

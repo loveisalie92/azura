@@ -32,4 +32,8 @@ class Issue extends Model
     public function setBuilderDatetimeAttribute($value){
         $this->attributes['builderDatetime'] =  Carbon::createFromFormat('m/d/Y',$value)->format('Y-m-d H:i:s');
     }
+    
+    public function area(){
+        return $this->belongsTo('App\Area','areaID',"ID");
+    }
 }

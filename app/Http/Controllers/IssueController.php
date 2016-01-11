@@ -35,4 +35,9 @@ class IssueController extends Controller
 
         return response()->json($issue);
     }
+    
+    public function report(){
+        $areas = Area::with('issues')->get();
+        return view('report',  compact('areas'));
+    }
 }

@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="map">
+    <div class="clearfix">
+        <a class="btn btn-primary pull-right" href="{{route('report')}}"><i class="glyphicon glyphicon-stats"></i> Report</a>
+    </div>
     @foreach($areas as $area)
 
         <div class="{{ $area->name }} area" style="{{ $area->position }}" onclick="Area.getIssues('{{route('issues.index').'?areaID='.$area->ID.'&role='.$role}}')">
@@ -46,7 +49,7 @@
     @foreach($areas as $area)
         Dropzone.options.upload{{$area->ID}} = {
             paramName: "photo", // The name that will be used to transfer the file
-            maxFilesize: 2, // MB
+            maxFilesize: 7, // MB
             previewsContainer: '#preview',
             clickable: false,
             success: function (file, response) {
@@ -56,6 +59,13 @@
                 $.wait(function(){
                     Issue.bindDatepicker(Issue.getDetailDom().find('.datepicker'));
                     Issue.goToOwnerComment();
+                    $(window).hover(function(event) {
+                    if (event.fromElement) {
+                        console.log("inactive");
+                    } else {
+                        console.log("active");
+                    }
+                    });
                 },0.5)
             },
             error: function (file, response) {

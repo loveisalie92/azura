@@ -22,7 +22,7 @@
                     <div class="row" style="margin-bottom: 20px">
                         <div class="col-md-6">
                             <select name="solution" id="" class="form-control">
-                                <option disabled="disabled" @if($currentIssue->solution == 'Blank' || !$currentIssue->solution) selected="selected" @endif>Blank</option>
+                                <option @if($currentIssue->solution == 'Blank' || !$currentIssue->solution) selected="selected" @endif>Blank</option>
                                 <option value="Replace" @if($currentIssue->solution == 'Replace') selected="selected" @endif>Replace</option>
                                 <option value="Repair" @if($currentIssue->solution == 'Repair') selected="selected" @endif>Repair</option>
                                 <option value="Not Accepted" @if($currentIssue->solution == 'Not Accepted') selected="selected" @endif>Not Accepted</option>

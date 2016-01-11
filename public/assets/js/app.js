@@ -2,16 +2,31 @@
 $.wait = function (callback, seconds) {
     return window.setTimeout(callback, seconds * 1000);
 };
+function updateQueryStringParameter(uri, key, value) {
+    var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+    var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+    if (uri.match(re)) {
+        return uri.replace(re, '$1' + key + "=" + value + '$2');
+    } else {
+        return uri + separator + key + "=" + value;
+    }
+}
 $.ajaxSetup({
+    beforeSend: function (jqXHR, settings) {
+        var role = $('meta[name="role"]').attr('content');
+        if(role==="owner"){
+            settings.url = updateQueryStringParameter(settings.url,'role','owner');
+        }
+    },
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
         'role': $('meta[name="csrf-token"]').attr('content')
     }
 });
-$( document ).ajaxSend(function() {
-   // $('body').addClass('loading');
+$(document).ajaxSend(function () {
+    // $('body').addClass('loading');
 });
-$( document ).ajaxComplete(function() {
+$(document).ajaxComplete(function () {
     $('body').removeClass('loading');
 });
 var App = App || {};
@@ -36,7 +51,7 @@ App.showSuccessMessage = function (message, dom) {
     $.wait(function () {
         $.wait(function () {
             $('#' + id).remove();
-        },4);
+        }, 4);
     }, 2);
 };
 App.showErrorMessage = function (message, dom) {
@@ -49,104 +64,113 @@ App.showErrorMessage = function (message, dom) {
     $.wait(function () {
         $.wait(function () {
             $('#' + id).remove();
-        },4);
+        }, 4);
     }, 2);
 };
 
 var Area = Area || {};
-Area.getIssuesWrapper = function(){
+Area.getIssuesWrapper = function () {
     return $('#issuesListWrapper');
 };
-Area.getissueDetailDom = function(){
+Area.getissueDetailDom = function () {
     return $('#issueDetail');
 };
-Area.getIssues = function(url){
+Area.getIssues = function (url) {
     $.ajax({
-        url : url,
-        method : 'get',
-        success : function (response) {
-           Area.getIssuesWrapper().html(response);
-           $('html, body').animate({
-               scrollTop: Area.getIssuesWrapper().offset().top
-           }, 500);
-           
-                Issue.closeDetailPanel();
+        url: url,
+        method: 'get',
+        success: function (response) {
+            Area.getIssuesWrapper().html(response);
+            $('html, body').animate({
+                scrollTop: Area.getIssuesWrapper().offset().top
+            }, 500);
+
+            Issue.closeDetailPanel();
         }
     });
 };
-Area.updateIssuesList = function(areaFormDom,areaID){
+Area.updateIssuesList = function (areaFormDom, areaID) {
     var html = $('#trIssuesTableTemplate').html();
     //console.log(html);
-    html = html.replace(/\%7Bid\%7D/,areaID);
-    html = html.replace(/\[OWNER_COMMENT\]/,"No comment yet");
+    html = html.replace(/\%7Bid\%7D/, areaID);
+    html = html.replace(/\[OWNER_COMMENT\]/,"New issue");
     // check if current area is  area that is uploading image
-    var currentDom = $('#issuesTable[data-areaID="'+areaID+'"]');
-    if(currentDom.length){ //current
+    var currentDom = $('#issuesTable[data-areaID="' + areaID + '"]');
+    if (currentDom.length) { //current
         currentDom.find('tbody').append(html);
         // $.wait(function(){
         //     Area.updateIssuesNumber(areaFormDom);
         // },1);
-    }else{
-        var url = baseUrl + 'issues/?areaID='+areaID;
+    } else {
+        var url = baseUrl + 'issues/?areaID=' + areaID;
         $.ajax({
-            url : url,
-            method : 'get',
-            success : function (response) {
-               Area.getIssuesWrapper().html(response);
-               $.wait(function(){
-                  // Area.updateIssuesNumber(areaFormDom);
-               },1);
+            url: url,
+            method: 'get',
+            success: function (response) {
+                Area.getIssuesWrapper().html(response);
+                $.wait(function () {
+                    // Area.updateIssuesNumber(areaFormDom);
+                }, 1);
             }
         });
     }
 
 };
-Area.updateIssuesNumber = function(formID){
+Area.updateIssuesNumber = function (formID) {
     var numberIssue = $(formID).find('.number-isuees').text();
     //console.log(formID);
     //console.log(numberIssue);
     var currentNumber = 0;
-    if(numberIssue){
+    if (numberIssue) {
         currentNumber = parseInt(numberIssue) + 1;
         $(formID).find('.number-isuees').text(currentNumber);
-    }else{
+    } else {
         currentNumber = 1;
-        $(formID).append('<label class="number-isuees">'+currentNumber+'</label>');
+        $(formID).append('<label class="number-isuees">' + currentNumber + '</label>');
     }
 };
-Area.update = function(form){
+Area.update = function (form) {
     var url = $(form).attr('action');
     var data = $(form).serialize();
-    $.post(url,data,function(res){
-        if(res.state === -1){
-            Area.getIssuesWrapper().find('table td[data-id="'+res.ID+'"]').parents('tr').remove();
-        }else{
-            Area.getIssuesWrapper().find('table td[data-id="'+res.ID+'"]').text(res.ownerComment);
+    $.post(url, data, function (res) {
+        if (res.state === -1) {
+            Area.getIssuesWrapper().find('table td[data-id="' + res.ID + '"]').parents('tr').remove();
+        } else {
+            if (Area.getIssuesWrapper().find('table td[data-id="' + res.ID + '"]').length) {
+                Area.getIssuesWrapper().find('table td[data-id="' + res.ID + '"]').text(res.ownerComment);
+            } else {
+                var html = $('#issueRowPattern').html();
+                html = html.replace(/\[\[ID\]\]/, res.ID);
+                html = html.replace(/ID_URL/, res.ID);
+                html = html.replace(/\[\[COMMENT\]\]/, res.ownerComment);
+                Area.getIssuesWrapper().find("table tbody").append(html);
+            }
+
         }
         App.showSuccessMessage("The issues has been updated success");
     });
 };
-Area.hideIssueForm = function(){
+Area.hideIssueForm = function () {
     Area.getissueDetailDom().html('');
 };
 
 var Issue = Issue || {};
-Issue.getDetailDom  = function(){
+Issue.getDetailDom = function () {
     return $('#issueDetail');
 };
 
-Issue.getDetail = function(dom,url){
+Issue.getDetail = function (dom, url) {
     $.ajax({
-        url : url,
-        method : 'get',
-        success : function (response) {
+        url: url,
+        method: 'get',
+        success: function (response) {
             Issue.getDetailDom().html(response);
-            $.wait(function(){
+            $.wait(function () {
                 //console.log(Issue.getDetailDom().find('.datepicker'));
                 Issue.bindDatepicker(Issue.getDetailDom().find('.datepicker'));
                 // window.location.hash = '#issueDetail [name="ownerComment"]';
-                Issue.goToOwnerComment ();
-            },0.5);
+                Issue.goToOwnerComment();
+            }, 0.5);
         }
     });
 
@@ -154,19 +178,19 @@ Issue.getDetail = function(dom,url){
 
 };
 
-Issue.hightLightCurrentIssue = function(dom) {
+Issue.hightLightCurrentIssue = function (dom) {
     $('.issues tr').removeClass('active-issue');
     $(dom).addClass('active-issue');
 }
 
 Issue.delete = function (url) {
     $.ajax({
-        url : url,
-        method : 'post',
-        data : {
-            _method : 'delete'
+        url: url,
+        method: 'post',
+        data: {
+            _method: 'delete'
         },
-        success : function (response) {
+        success: function (response) {
             App.showSuccessMessage("The issues has been deleted");
             Issue.updateIssueListAfterDelete(response.ID);
             Area.hideIssueForm();
@@ -175,21 +199,22 @@ Issue.delete = function (url) {
 };
 
 Issue.updateIssueListAfterDelete = function (id) {
-    var dom = Area.getIssuesWrapper().find('table td[data-id="'+id+'"]').parents('tr');
+    var dom = Area.getIssuesWrapper().find('table td[data-id="' + id + '"]').parents('tr');
     dom.remove();
 }
-Issue.bindDatepicker = function(dom) {
+Issue.bindDatepicker = function (dom) {
     $(dom).datepicker({
         format: 'mm/dd/yyyy'
     });
 };
-Issue.goToOwnerComment = function(){
+Issue.goToOwnerComment = function () {
     $('html, body').animate({
         scrollTop: Issue.getDetailDom().find('[name="ownerComment"]').offset().top
     }, 500);
     Issue.getDetailDom().find('[name="ownerComment"]').focus();
+    Issue.getDetailDom().find('[name="ownerComment"]').select();
 };
 
-Issue.closeDetailPanel = function() {
+Issue.closeDetailPanel = function () {
     Issue.getDetailDom().html('');
 };
