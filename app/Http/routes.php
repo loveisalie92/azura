@@ -41,10 +41,20 @@ Route::get('report', [
     'as' => 'report',
     'uses' => 'IssueController@report'
 ]);
-/**
+
 Route::get('test',function(){
     echo "REMOTE_ADDR ".$_SERVER['REMOTE_ADDR']."<br/>";
-    echo "HTTP_CLIENT_IP ".$_SERVER['HTTP_CLIENT_IP']."<br/>";
-    echo "HTTP_X_FORWARDED_FOR ".$_SERVER['HTTP_X_FORWARDED_FOR']."<br/>";
+    try {
+       echo "HTTP_CLIENT_IP ".$_SERVER['HTTP_CLIENT_IP']."<br/>";    
+    } catch (Exception $ex) {
+        echo $ex->getMessage();
+    }
+    try {
+        echo "HTTP_X_FORWARDED_FOR ".$_SERVER['HTTP_X_FORWARDED_FOR']."<br/>";   
+    } catch (Exception $ex) {
+        echo $ex->getMessage();
+    }
+    
+    
 });
-**/
+
