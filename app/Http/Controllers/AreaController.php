@@ -84,6 +84,8 @@ class AreaController extends Controller
             $data['state'] = Issue::COMPLETE_STATE;
             $data['completedAt'] = date('Y-m-d H:i:s');
             $data['ownerDatetime'] = date('Y-m-d H:i:s');
+        }else{
+            $data['state'] = Issue::WAITING_STATE;
         }
         $issue->fill($data);
         $issue->save();
