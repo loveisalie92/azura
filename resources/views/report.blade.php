@@ -19,7 +19,7 @@
                         <p><label>Builer Comment : </label> {{$issue->builderComment}}</p>
                         <?php
                             $status = "";
-                            switch ($issue->status) {
+                            switch ($issue->state) {
                                 case 0 : $status = "Waiting";
                                         break;
                                 case -1 : $status = "Deleted";
