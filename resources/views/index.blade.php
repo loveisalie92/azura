@@ -3,7 +3,7 @@
 @section('content')
 <div class="map">
     <div class="clearfix">
-        <a class="btn btn-primary pull-right" href="{{route('report')}}"><i class="glyphicon glyphicon-stats"></i> Report</a>
+        <a class="btn btn-primary pull-right" href="{{route('report')}}?role={{$role}}"><i class="glyphicon glyphicon-stats"></i> Report</a>
     </div>
     @foreach($areas as $area)
 
@@ -25,10 +25,26 @@
 
     </div>
 </div>
+<?php
+    $issueID = \Request::query('issue');
+    $areaID = \Request::query('area');
+?>
 <div class="row issuesList" id="issuesListWrapper">
-
+    <?php
+        if($areaID){
+           $area = \App\Area::findOrFail($areaID);
+           $issues = \App\Issue::where('areaID',$areaID)->available()->get();
+           echo view('_partials.issues.lists',['area'=>$area,'issues'=>$issues,'role'=>$role])->render();
+        }
+    ?>
 </div>
 <div id="infoContent">
+    <?php 
+        if($issueID){
+            $currentIssue = \App\Issue::findOrFail($issueID);
+             echo view('_partials.issues.show',['currentIssue'=>$currentIssue,'role'=>$role])->render();
+        }
+    ?>
 </div>
 </div>
 <div class="container">
@@ -72,6 +88,10 @@
             }
         };
     @endforeach
+    
+    @if($issueID)
+    Issue.goToOwnerComment();
+    @endif
     </script>
     @endif
 @endsection

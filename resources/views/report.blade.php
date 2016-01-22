@@ -2,7 +2,7 @@
 
 @section('content')
 <div style="width: 680px;margin: auto" id="report">
-    <h1 class="text-center">Report</h1>
+    <h1 class="text-center"><a href="{{url('/')}}"><i class="glyphicon glyphicon-home pull-left"></i></a>Report</h1>
     @foreach($areas as $area)
     <?php $count = count($area->issues); ?> 
     @if($count)
@@ -12,7 +12,7 @@
             <li>
                 <div class="row">
                     <div class="col-sm-3">
-                        <img src="{{asset($issue->photo)}}" class="img-thumbnail img-responsive" />
+                        <a href="{{url('/')}}?role={{$role}}&issue={{$issue->ID}}&area={{$area->ID}}"><img src="{{asset($issue->photo)}}" class="img-thumbnail img-responsive" /></a>
                     </div>
                     <div class="col-sm-9">
                         <p><label>Owner Comment : </label> {{$issue->ownerComment}}</p>
